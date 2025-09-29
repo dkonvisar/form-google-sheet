@@ -12,7 +12,7 @@ function doPost(e) {
   }
 
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
-  sheet.appendRow([new Date(), data.name, data.email, data.message]);
+  sheet.appendRow([new Date(), data.name, data.email]);
 
   return ContentService.createTextOutput(JSON.stringify({ result: 'success' })).setMimeType(
     ContentService.MimeType.JSON
