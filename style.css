@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+  background: beige;
+}
+
+.form-control {
+  display: block;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 10px;
+  display: block;
+  width: 100%;
+}
+
+input[name='website'] {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+button {
+  padding: 10px;
+  background-color: orangered;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button[disabled] {
+  background-color: gray;
+  pointer-events: none;
+}
