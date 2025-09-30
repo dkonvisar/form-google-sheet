@@ -11,7 +11,9 @@ function doPost(e) {
     );
   }
 
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  const role = data.role;
+
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(role);
   sheet.appendRow([new Date(), data.name, data.email]);
 
   return ContentService.createTextOutput(JSON.stringify({ result: 'success' })).setMimeType(
