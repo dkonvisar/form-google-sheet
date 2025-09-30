@@ -1,9 +1,22 @@
 const scriptURL =
-  'https://script.google.com/macros/s/AKfycbwIkHrcMjEQ4IJlPufUEF7T972A8oF73fTkygk7JFYlUTOXZu1dNC1q9fGKSBuG84YYog/exec';
+  'https://script.google.com/macros/s/AKfycbxFqwPOWNA5w2sm4w8hSZX6n_62KeTKMmloFn_cNgEMymOMyhkoPYuNFhMuAPgCujI3cA/exec';
 
 const form = document.getElementById('form');
-const submitBtn = form.querySelector('button');
+const submitBtn = form.querySelector('button[type="submit"]');
+const roleBtns = document.querySelectorAll('.btn-role');
+let roleInput = form.querySelector('#role');
 const formResponseMsg = form.parentElement.querySelector('#responseMsg');
+
+let roleStatus = ''; // default role
+
+document.querySelectorAll('.btn-role').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+
+    const roleAttr = btn.getAttribute('data-role');
+    roleStatus = roleAttr;
+  });
+});
 
 // Disable submit button if form is invalid
 const toggleButton = submitBtn => {
@@ -25,8 +38,10 @@ form.addEventListener('submit', function (e) {
   const data = {
     name: form.name.value,
     email: form.email.value,
+    role: roleStatus || 'member', // default role if none selected
     website: form.website.value, // honeypot
   };
+
   fetch(scriptURL, {
     method: 'POST',
     mode: 'no-cors',
@@ -36,6 +51,7 @@ form.addEventListener('submit', function (e) {
     .then(() => {
       formResponseMsg.innerText = '✅ Message sent!';
       form.reset();
+      roleStatus = ''; // reset role status
 
       setTimeout(() => {
         formResponseMsg.innerText = '';
